@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import config from './api/config';
+import load from './api/sheet';
 
 function App() {
+  useEffect(() => {
+    window.gapi.load('client:auth2', initClient);
+  });
+  const initClient = () => {
+    window.gapi.client
+      .init({
+        apiKey: process.env.REACT_APP_APIKEY,
+        discoveryDocs: config.discoveryDocs
+      })
+      .then(() => {
+        load(onLoad);
+      });
+  };
+  const onLoad = (data, error) => {
+    if (data) {
+      console.log(data);
+    } else {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
     </div>
   );
 }
