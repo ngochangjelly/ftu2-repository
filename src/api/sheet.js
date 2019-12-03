@@ -1,11 +1,11 @@
 import config from './config';
-
+const RANGE = 'Sheet1!A1:C10';
 export const load = callback => {
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values
       .get({
         spreadsheetId: config.spreadsheetId,
-        range: 'Sheet1!A1:C2'
+        range: RANGE
       })
       .then(
         response => {
@@ -52,4 +52,14 @@ export const makeApiCall = () => {
       console.error('error: ' + reason.result.error.message);
     }
   );
+};
+export const initClient = onLoad => {
+  window.gapi.client
+    .init({
+      apiKey: process.env.REACT_APP_APIKEY,
+      discoveryDocs: config.discoveryDocs
+    })
+    .then(() => {
+      load(onLoad);
+    });
 };
