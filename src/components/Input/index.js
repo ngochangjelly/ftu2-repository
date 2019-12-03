@@ -27,7 +27,6 @@ const Input = ({ data }) => {
   };
   useEffect(() => {
     window.addEventListener('keyup', handleKeyUp);
-    // clean up event listener
     return () => window.removeEventListener('keyup', handleKeyUp);
   });
   const handleChange = debounce(e => {
