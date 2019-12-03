@@ -1,0 +1,12 @@
+.appBg {
+  /* background-color: #b51b20; */
+  background-color: seashell;
+  width: 100%;
+  height: 100vh;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
