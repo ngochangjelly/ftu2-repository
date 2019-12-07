@@ -1,5 +1,5 @@
 import config from './config';
-const RANGE = 'Sheet1!A1:C10';
+const RANGE = 'Sheet1!A1:D10';
 export const load = callback => {
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values
@@ -10,12 +10,17 @@ export const load = callback => {
       .then(
         response => {
           const data = response.result.values;
-          const items =
-            data.map(item => ({
-              id: item[0],
-              name: item[1],
-              meta: item[2]
-            })) || [];
+          let items = [];
+          data.map((item, key) => {
+            if (key !== 0) {
+              items.push({
+                id: item[0],
+                name: item[1],
+                meta: item[2],
+                url: item[3]
+              });
+            }
+          });
           callback({
             items
           });

@@ -3,40 +3,30 @@ import debounce from 'react-debouncing';
 import Downshift from 'downshift';
 import Fuse from 'fuse.js';
 import { ListItem, ListItemText } from '@material-ui/core';
+import BaseInput from '@material-ui/core/Input';
 
 import { makeApiCall } from '../../api/sheet';
 
 const opts = { name: 'name', meta: 'meta' };
 
-export const ListItemLink = props => {
-  return <ListItem button component="a" {...props} />;
-};
 const Input = ({ data }) => {
   const [result, setResult] = useState(data);
   const options = { keys: [opts.name, opts.meta] };
   const fuse = new Fuse(data, options);
   const items = data;
-  const handleKeyUp = event => {
-    switch (event.keyCode) {
-      case 13:
-        console.log('hit enter');
-        break;
-      default:
-        return;
-    }
+
+  const handleSelect = selectedItem => {
+    window.open(selectedItem.url, '_blank');
   };
-  useEffect(() => {
-    window.addEventListener('keyup', handleKeyUp);
-    return () => window.removeEventListener('keyup', handleKeyUp);
-  });
-  const handleChange = debounce(e => {
-    console.log(e.target.value);
-    // makeApiCall();
-  }, 300);
-  const handleSelect = selectedItem =>
-    alert(
-      selectedItem ? `You selected ${selectedItem.name}` : 'Selection Cleared'
-    );
+  const dummy = [
+    {
+      id: '1',
+      meta: 'thanh thuy, photo, tai lieu hoc tap',
+      name: 'test',
+      url:
+        'https://stackoverflow.com/questions/20278498/open-a-new-tab-with-javascript-but-stay-on-current-tab-using-javascript'
+    }
+  ];
   return (
     <div>
       <Downshift
@@ -53,25 +43,32 @@ const Input = ({ data }) => {
           selectedItem
         }) => (
           <div>
-            <input className="searchBox" {...getInputProps()} />
-            <ul className="resultBox" {...getMenuProps()}>
+            <BaseInput className="searchBox" {...getInputProps()} />
+            <ul style={{ padding: '0 0 0 0' }} {...getMenuProps()}>
               {isOpen && items
-                ? fuse.search(inputValue).map((item, index) => (
-                    <ListItemLink
+                ? // ? fuse.search(inputValue).map((item, index) => (
+                  dummy.map((item, index) => (
+                    <ListItem
+                      key={index}
                       {...getItemProps({
                         key: item.value,
                         index,
                         item,
                         style: {
+                          width: '100%',
                           backgroundColor:
-                            highlightedIndex === index ? 'lightgray' : 'white',
+                            highlightedIndex === index
+                              ? 'lightgray'
+                              : 'transparent',
                           fontWeight: selectedItem === item ? 'bold' : 'normal'
                         }
                       })}
-                      href="#simple-list"
+                      href={item.url}
+                      target="_blank"
+                      rel="nofollow"
                     >
                       <ListItemText primary={`${item.name} + ${item.meta}`} />
-                    </ListItemLink>
+                    </ListItem>
                   ))
                 : null}
             </ul>
