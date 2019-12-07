@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { initClient } from '../api/sheet';
-import './App.css';
+import styles from './App.module.scss';
 import Input from './Input';
 
 function App() {
@@ -26,8 +26,7 @@ function App() {
   }, []);
 
   return (
-    <div className={classNames('appBg', 'center')}>
-      <h2 style={{ marginBottom: '20px' }}>Let's type something</h2>
+    <div className={classNames(styles.appBg)}>
       <Input data={data} />
     </div>
   );

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import debounce from 'react-debouncing';
 import Downshift from 'downshift';
 import Fuse from 'fuse.js';
-import { ListItem, ListItemText } from '@material-ui/core';
-import BaseInput from '@material-ui/core/Input';
+import { ListItem, ListItemText, Input } from '@material-ui/core';
+import ClampLines from 'react-clamp-lines';
 
-import { makeApiCall } from '../../api/sheet';
+import styles from '../../components/App.module.scss';
 
 const opts = { name: 'name', meta: 'meta' };
 
-const Input = ({ data }) => {
+const SearchInput = ({ data }) => {
   const [result, setResult] = useState(data);
   const options = { keys: [opts.name, opts.meta] };
   const fuse = new Fuse(data, options);
@@ -18,15 +17,6 @@ const Input = ({ data }) => {
   const handleSelect = selectedItem => {
     window.open(selectedItem.url, '_blank');
   };
-  const dummy = [
-    {
-      id: '1',
-      meta: 'thanh thuy, photo, tai lieu hoc tap',
-      name: 'test',
-      url:
-        'https://stackoverflow.com/questions/20278498/open-a-new-tab-with-javascript-but-stay-on-current-tab-using-javascript'
-    }
-  ];
   return (
     <div>
       <Downshift
@@ -43,13 +33,15 @@ const Input = ({ data }) => {
           selectedItem
         }) => (
           <div>
-            <BaseInput className="searchBox" {...getInputProps()} />
-            <ul style={{ padding: '0 0 0 0' }} {...getMenuProps()}>
+            <Input
+              disableUnderline={true}
+              className={styles.searchBox}
+              {...getInputProps()}
+            />
+            <ul className={styles.resultList} {...getMenuProps()}>
               {isOpen && items
-                ? // ? fuse.search(inputValue).map((item, index) => (
-                  dummy.map((item, index) => (
+                ? fuse.search(inputValue).map((item, index) => (
                     <ListItem
-                      key={index}
                       {...getItemProps({
                         key: item.value,
                         index,
@@ -58,7 +50,7 @@ const Input = ({ data }) => {
                           width: '100%',
                           backgroundColor:
                             highlightedIndex === index
-                              ? 'lightgray'
+                              ? '#f5f6f8'
                               : 'transparent',
                           fontWeight: selectedItem === item ? 'bold' : 'normal'
                         }
@@ -67,7 +59,18 @@ const Input = ({ data }) => {
                       target="_blank"
                       rel="nofollow"
                     >
-                      <ListItemText primary={`${item.name} + ${item.meta}`} />
+                      <ListItemText
+                        primary={
+                          <ClampLines
+                            text={`${item.name} + ${item.meta}`}
+                            lines={2}
+                            ellipsis="..."
+                            moreText="Expand"
+                            lessText="Collapse"
+                            className="custom-class"
+                          />
+                        }
+                      />
                     </ListItem>
                   ))
                 : null}
@@ -78,4 +81,4 @@ const Input = ({ data }) => {
     </div>
   );
 };
-export default Input;
+export default SearchInput;
