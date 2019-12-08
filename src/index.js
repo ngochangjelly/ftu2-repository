@@ -9,9 +9,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route path="/" exact component={App}></Route>
-      {/* <Route path="/about" component={<div>about</div>}></Route> */}
-      {/* <Route path="/users"></Route> */}
+      <Route path="/" exact component={App} />
       <Route component={NotFound} />
     </Switch>
   </Router>,
