@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './index.css';
 import App from './components/App';
-import NotFound from './components/NotFound';
 import * as serviceWorker from './serviceWorker';
+import NotFound from './components/NotFount/index';
 
 ReactDOM.render(
   <Router>
