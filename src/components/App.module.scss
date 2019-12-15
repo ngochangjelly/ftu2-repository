@@ -3,6 +3,12 @@ $baseRed: rgb(177, 49, 64);
 $boxShadow: 0 20px 25px -5px rgba(114, 71, 71, 0.1),
   0 10px 10px -5px rgba(0, 0, 0, 0.04);
 $containerPadding: 20px 100px 20px 100px;
+@mixin center {
+  // write the css here
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+}
 body {
   background-color: white;
 }
@@ -98,6 +104,7 @@ body {
 .resultNumber {
   color: $baseRed;
   font-weight: bold;
+  margin-right: 4px;
 }
 .textAreaBox {
   width: 100%;
@@ -115,4 +122,8 @@ body {
   color: $baseRed;
   position: absolute;
   right: 12px;
+}
+.loadingIcon {
+  @include center();
+  margin-top: 35px;
 }

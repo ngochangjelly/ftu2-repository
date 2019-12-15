@@ -8,8 +8,8 @@ import { Fab, Tooltip } from '@material-ui/core';
 import Popup from './Popup/index';
 
 function App() {
-  const [data, setData] = useState(null);
   const [isPopupOpen, setPopupOpen] = useState(false);
+  const [data, setData] = useState(null);
   useEffect(() => {
     if (!window.localStorage.getItem('data')) {
       window.gapi.load('client:auth2', () =>

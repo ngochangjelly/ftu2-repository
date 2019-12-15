@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemText,
   Input,
-  LinearProgress
+  CircularProgress
 } from '@material-ui/core';
 import { Clear } from '@material-ui/icons';
 import ClampLines from 'react-clamp-lines';
@@ -86,8 +86,8 @@ const SearchInput = ({ data }) => {
               </div>
               <ul className={styles.resultList} {...getMenuProps()}>
                 {!items && (
-                  <div>
-                    <LinearProgress color="secondary" />
+                  <div className={styles.loadingIcon}>
+                    <CircularProgress color="secondary"/>
                   </div>
                 )}
                 {totalSearchResults && isOpen && (
@@ -102,7 +102,7 @@ const SearchInput = ({ data }) => {
                   ? filteredRes.map((item, index) => {
                       setTotalSearchResults(filteredRes.length);
                       return (
-                        <Link to={item.route}>
+                        <Link to={`post/${item.route}`}>
                           <ListItem
                             {...getItemProps({
                               key: item.value,

@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import NotFound from './components/NotFount/index';
+import NotFound from './components/NotFound';
+import Post from './components/Post'
 
 ReactDOM.render(
   <Router>
     <Switch>
       <Route path="/" exact component={App} />
+      <Route path="/post/:postId" component={Post}/>
       <Route component={NotFound} />
     </Switch>
   </Router>,

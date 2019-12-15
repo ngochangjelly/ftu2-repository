@@ -1,5 +1,5 @@
 import config from './config';
-const RANGE = 'Sheet1!A1:D1000';
+const RANGE = 'Sheet1!A1:E1000';
 export const load = callback => {
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values
@@ -23,6 +23,7 @@ export const load = callback => {
                 name: item[1],
                 meta: item[2],
                 url: item[3],
+                comments: item[4],
                 route: `${item[0]}`
               });
             }
@@ -74,3 +75,8 @@ export const initClient = onLoad => {
       load(onLoad);
     });
 };
+export const getCellValue = (cell) => {
+  // https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}/values/{range}
+
+
+}
