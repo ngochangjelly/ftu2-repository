@@ -127,3 +127,23 @@ body {
   @include center();
   margin-top: 35px;
 }
+// post detail
+.textPrimaryRed{
+  color: $baseRed
+}
+.postContentSection{
+  border-top-left-radius: 30px;
+  box-shadow: $boxShadow;
+  width: 60%;
+}
+.postCommentSection{
+  border-top-right-radius: 30px;
+  background-color: $baseGray;
+  box-shadow: $boxShadow;
+  width: 40%;
+}
+.postContainer{
+  display: flex;
+  margin-top: 20px;
+  height: 100vh;
+}
