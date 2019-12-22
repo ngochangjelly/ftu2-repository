@@ -1,0 +1,275 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 20px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+$baseGray: #f5f6f8;
+$baseRed: rgb(177, 49, 64);
+$boxShadow: 0 20px 25px -5px rgba(114, 71, 71, 0.1),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$containerPadding: 20px 100px 20px 100px;
+$primary-gray: rgb(72, 74, 90);
+$base-text: rgb(124, 141, 161);
+$base-border-radius: 16px;
+@keyframes scaleIn {
+  from {
+    transform: scale(.5, .5);
+    opacity: .5;
+  }
+  to {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+  }
+}
+@mixin center {
+  // write the css here
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+}
+body {
+  background-color: white;
+}
+.appBg {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.searchBox {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  border-radius: 9999999px;
+  padding: 0px 40px 0px 20px;
+  font-size: 20px;
+  box-shadow: $boxShadow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.searchBox:focus {
+  outline: none;
+}
+.resultList {
+  padding: 0 0 0 0;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  width: 400px;
+  height: 20px;
+}
+.listItem {
+  position: relative;
+  width: 100%;
+}
+.listItem:hover::after {
+  content: '';
+  width: 40%;
+  height: 4px;
+  background: $baseRed;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+.listItem:focus::after {
+  content: '';
+  width: 40%;
+  height: 4px;
+  background: $baseRed;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+.textGray {
+  color: $baseGray;
+}
+.textRed {
+  color: $baseRed;
+}
+.grayBg {
+  background-color: $baseGray;
+}
+.header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.btn {
+  outline: none;
+  border: 0;
+  padding: 0;
+  width: 30px;
+  height: 40px;
+  background-color: white;
+}
+.btn:focus {
+  outline: none;
+}
+.searchResultNoti {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.resultNumber {
+  color: $baseRed;
+  font-weight: bold;
+  margin-right: 4px;
+}
+.textAreaBox {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+  border-radius: 9999999px;
+  padding: 0px 20px 0px 30px;
+  font-size: 20px;
+  box-shadow: $boxShadow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.searchClearBtn {
+  color: $baseRed;
+  position: absolute;
+  right: 12px;
+}
+.loadingIcon {
+  @include center();
+  margin-top: 35px;
+}
+// post detail
+.textPrimaryRed {
+  color: $baseRed;
+}
+
+.post-container {
+  display: flex;
+  height: 100vh;
+  > .post-content-section {
+    border-top-left-radius: 30px;
+    box-shadow: $boxShadow;
+    width: 50%;
+  }
+}
+.materialTitle {
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: $primary-gray;
+}
+.materialUrl {
+  text-decoration: none;
+  color: $base-text;
+  font-size: 1rem;
+}
+.backHomeBtn {
+  width: 36px;
+  height: 36px;
+  color: $base-text;
+  &:hover {
+    color: rgb(52, 56, 79);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+a {
+  text-decoration: none;
+  color: $primary-gray;
+}
+a:visited {
+  color: $primary-gray;
+}
+.post-comment-section {
+  border-top-right-radius: 30px;
+  background-color: $baseGray;
+  box-shadow: $boxShadow;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  > .hashtag-section {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 20px;
+    > .hashtag-pill {
+      color: white;
+      background-color: $baseRed;
+      padding: 8px 8px 8px 8px;
+      // box-sizing: border-box;
+      margin-right: 4px;
+      margin-bottom: 4px;
+      border-radius: $base-border-radius;
+      font-size: 0.75rem;
+    }
+  }
+  > .comments-section {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .comment {
+      width: 80%;
+      height: auto;
+      font-size: 1rem;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: white;
+      color: $primary-gray;
+      margin-bottom: 25px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+  }
+  > .compose-comment {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    border-top: 1px solid;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    font-size: 1rem;
+    > .send-bubble {
+      height: 40px;
+      width: 40px;
+      background-color: $baseRed;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity:0;
+      animation: scaleIn 4s infinite cubic-bezier(.36, .11, .89, .32);
+    }
+    > textarea {
+      width: 100%;
+      height: 100%;
+      padding:8px;
+      border:none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

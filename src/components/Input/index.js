@@ -12,8 +12,6 @@ import ClampLines from 'react-clamp-lines';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
-import styles from '../../components/App.module.scss';
-
 const opts = { name: 'name', meta: 'meta' };
 
 const SearchInput = ({ data }) => {
@@ -25,7 +23,7 @@ const SearchInput = ({ data }) => {
   const items = data;
 
   const handleSelect = selectedItem => {
-    selectedItem && history.push(selectedItem.route);
+    selectedItem && history.push(`post/${selectedItem.route}`);
   };
   return (
     <div>
@@ -61,17 +59,19 @@ const SearchInput = ({ data }) => {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginTop: '50%',
-                  position: 'relative'
+                  marginTop: '40%',
+                  position: 'relative',
                 }}
               >
                 <Input
                   disableUnderline={true}
-                  className={styles.searchBox}
+                  className={'searchBox'}
                   {...getInputProps({
                     onChange: e => {
                       if (e.target.value === '') {
                         clearSelection();
+                      } else {
+                        console.log('input not empty')
                       }
                     }
                   })}
@@ -81,18 +81,18 @@ const SearchInput = ({ data }) => {
                     reset();
                     isOpen = true;
                   }}
-                  className={styles.searchClearBtn}
+                  className={'searchClearBtn'}
                 />
               </div>
-              <ul className={styles.resultList} {...getMenuProps()}>
+              <ul className={'resultList'} {...getMenuProps()}>
                 {!items && (
-                  <div className={styles.loadingIcon}>
+                  <div className={'loadingIcon'}>
                     <CircularProgress color="secondary"/>
                   </div>
                 )}
                 {totalSearchResults && isOpen && (
-                  <div className={styles.searchResultNoti}>
-                    <span className={styles.resultNumber}>
+                  <div className={'searchResultNoti'}>
+                    <span className={'resultNumber'}>
                       {totalSearchResults}
                     </span>
                     <span> results.</span>
@@ -102,7 +102,7 @@ const SearchInput = ({ data }) => {
                   ? filteredRes.map((item, index) => {
                       setTotalSearchResults(filteredRes.length);
                       return (
-                        <Link to={`post/${item.route}`}>
+                        <Link key={index} to={`post/${item.route}`}>
                           <ListItem
                             {...getItemProps({
                               key: item.value,
@@ -118,21 +118,14 @@ const SearchInput = ({ data }) => {
                                   selectedItem === item ? 'bold' : 'normal'
                               }
                             })}
-                            className={styles.listItem}
+                            className={'listItem'}
                             target="_blank"
                             rel="nofollow"
                             pointer="cursor"
                           >
                             <ListItemText
                               style={{ textOverflow: 'ellipsis' }}
-                              primary={
-                                <ClampLines
-                                  text={`${item.name} + ${item.meta}`}
-                                  lines={2}
-                                  moreText="..."
-                                  innerElement="p"
-                                />
-                              }
+                              primary={item.name}
                               pointer="cursor"
                             />
                           </ListItem>

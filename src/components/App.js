@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 import { FiEdit } from 'react-icons/fi';
 import { initClient } from '../api/sheet';
-import styles from './App.module.scss';
+import styles from '../index.scss';
 import Input from './Input';
 import { Fab, Tooltip } from '@material-ui/core';
 import Popup from './Popup/index';
@@ -29,11 +29,11 @@ function App() {
   }, []);
 
   return (
-    <div className={classNames(styles.appBg)}>
+    <div className={classNames('appBg')}>
       {isPopupOpen ? (
         <Popup text="Close Me" closePopup={() => setPopupOpen(false)} />
       ) : null}
-      <div className={styles.header}>
+      <div className={'header'}>
         <Tooltip style={{ fontSize: 'inherit' }} title="new post" arrow>
           <Fab
             onClick={() => setPopupOpen(true)}
@@ -44,7 +44,7 @@ function App() {
           </Fab>
         </Tooltip>
       </div>
-      <Input data={data} />
+          <Input data={data} />
     </div>
   );
 }
